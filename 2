@@ -1,0 +1,14 @@
+Anatomy of file write to HDFS:
+         >initially client calls create() method,now the namenode checks the existency of file
+         >if there is a file ,then it sends an IOexception or otherwise it sends a location to create a new file
+         through FSOutputStream.
+         >Now this FSDataOutputStream calls DFSOutputStream that communicates with the datnode.
+         >the client writes the file by sending write() signals
+         >these data are stored in the data queue which is further given to the data streamer
+         >data streamer ask the namenode for replication factor and location
+         >First datanode stores each packet and forwards it to the second datanode in the pipeline.
+         >the second datanode stores the packet and forwards it to the third datanode in the pipeline.
+         >The DFSOutputStream also maintains an internal queue called the ack queue.
+         >A packet is removed from the ack queue only when it has been acknowledged by all the datanodes.
+
+
