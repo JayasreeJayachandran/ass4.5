@@ -1,0 +1,8 @@
+Handling Failures During Writing a File:
+      >At first,the pipelines are closed and the left packets on ack queue are placed on the data pipeline 
+      so that the loss of data packets does not occur.
+      >Now,the current new datanode is given new identity and then the failed datanode is deleted in 
+      case of failure of recovering the damaged nodes data.
+      >The failed datanode is removed from the pipeline by replacing it in the good namenode.
+      >Then the namenode checks whether its under replicaion and completes the replication process and 
+      follows the next block normally.
